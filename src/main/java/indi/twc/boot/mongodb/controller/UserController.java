@@ -1,8 +1,10 @@
 package indi.twc.boot.mongodb.controller;
 
-import indi.twc.boot.mongodb.dao.UserMongoDao;
-import indi.twc.boot.mongodb.entity.UserEntity;
+import indi.twc.boot.mongodb.dao.UserMongoDaoImpl;
+import indi.twc.boot.mongodb.entity.Report;
+import indi.twc.boot.mongodb.entity.User;
 import indi.twc.boot.mongodb.utils.Pagination;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -11,42 +13,51 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/UserController")
+@Slf4j
 public class UserController {
 
     @Autowired
-    private UserMongoDao userMongoDao;
+    private UserMongoDaoImpl userMongoDao;
 
-    @RequestMapping("/addUserEntity")
+    @RequestMapping("/addUser")
     public void addUserEntity() throws Exception {
-        UserEntity user=new UserEntity();
+        User user=new User();
         user.setUserName("mmm");
         user.setPassWord("000000");
+
+        Report report = new Report();
+        report.setId("59c10dc22e9bef765663b439");
+        report.setContent("mmm");
+        report.setDate(new Date().toString());
+        report.setTitle("789");
+        user.setReport(report);
         userMongoDao.save(user);
     }
 
     @RequestMapping("/listAll")
-    public List<UserEntity> listAll() throws Exception {
+    public List<User> listAll() throws Exception {
         Query query = new Query();
         return userMongoDao.find(query);
     }
 
     @RequestMapping("/findById/{id}")
-    public UserEntity findById(@PathVariable String id) throws Exception {
+    public User findById(@PathVariable String id) throws Exception {
         return userMongoDao.findById(id);
     }
 
     @RequestMapping("/findOne/{username}")
-    public UserEntity findOne(@PathVariable String username) throws Exception {
+    public User findOne(@PathVariable String username) throws Exception {
         Query query = new Query(Criteria.where("userName").is(username));
         return userMongoDao.findOne(query);
     }
 
     @RequestMapping("/update/{username}")
-    public UserEntity update(@PathVariable String username) throws Exception {
+    public User update(@PathVariable String username) throws Exception {
         Query query = new Query(Criteria.where("userName").is(username));
         //特殊更新，更新author为jason的数据，如果没有author为jason的数据则以此条件创建一条新的数据
         //update的rename方法用于修改key的名称
@@ -59,7 +70,7 @@ public class UserController {
     }
 
     @RequestMapping("/remove/{id}")
-    public UserEntity remove(@PathVariable String id) throws Exception {
+    public User remove(@PathVariable String id) throws Exception {
         Query query = new Query(Criteria.where("id").is(id));
         return userMongoDao.remove(query);
     }

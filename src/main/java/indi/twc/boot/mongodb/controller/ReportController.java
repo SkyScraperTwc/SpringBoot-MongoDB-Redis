@@ -1,7 +1,7 @@
 package indi.twc.boot.mongodb.controller;
 
-import indi.twc.boot.mongodb.dao.ReportMongoDao;
-import indi.twc.boot.mongodb.dao.UserMongoDao;
+import indi.twc.boot.mongodb.dao.ReportMongoDaoImpl;
+import indi.twc.boot.mongodb.dao.UserMongoDaoImpl;
 import indi.twc.boot.mongodb.entity.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,17 +16,17 @@ import java.util.List;
 public class ReportController {
 
     @Autowired
-    private ReportMongoDao reportMongoDao;
+    private ReportMongoDaoImpl reportMongoDao;
 
     @Autowired
-    private UserMongoDao userMongoDao;
+    private UserMongoDaoImpl userMongoDao;
 
     @RequestMapping("/addReport")
     public void addReport() throws Exception {
         Report report = new Report();
-        report.setContent("qqq");
+        report.setContent("mmm");
         report.setDate(new Date().toString());
-        report.setTitle("twctwc");
+        report.setTitle("789");
         reportMongoDao.save(report);
     }
 

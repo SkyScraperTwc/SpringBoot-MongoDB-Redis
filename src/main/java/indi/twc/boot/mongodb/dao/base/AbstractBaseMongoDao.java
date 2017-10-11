@@ -1,4 +1,4 @@
-package indi.twc.boot.mongodb.dao;
+package indi.twc.boot.mongodb.dao.base;
 
 import indi.twc.boot.mongodb.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.List;
 
-public class BaseMongoDao<T> implements IBaseMongoDao<T>{
+public abstract class AbstractBaseMongoDao<T> implements IBaseMongoDao<T> {
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -74,24 +74,6 @@ public class BaseMongoDao<T> implements IBaseMongoDao<T>{
         pagination.build(dataList);//获取数据
 
         return pagination;
-    }
-
-    /**
-     * 获取需要操作的实体类class
-     * @return
-     */
-    @Override
-    public Class<T> getEntityClass() {
-        return null;
-    }
-
-    /**
-     * 获取需要操作的集合collectionName名字
-     * @return
-     */
-    @Override
-    public String getCollectionName() {
-        return null;
     }
 
 }

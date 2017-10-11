@@ -1,14 +1,12 @@
 package indi.twc.boot.redis;
 import com.alibaba.fastjson.JSON;
-import indi.twc.boot.mongodb.entity.UserEntity;
-import indi.twc.boot.redis.utils.ExpireTime;
-import indi.twc.boot.redis.utils.RedisCacheUtils;
+import indi.twc.boot.mongodb.entity.User;
 
 public class Test {
     public static void main(String[] args) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setPassWord("123456");
-        userEntity.setUserName("twc");
+        User user = new User();
+        user.setPassWord("123456");
+        user.setUserName("twc");
 
         String str = "v2";
 

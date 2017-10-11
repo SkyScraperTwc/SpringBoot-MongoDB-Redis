@@ -1,19 +1,15 @@
 package indi.twc.boot.redis.controller;
 
-import indi.twc.boot.mongodb.entity.UserEntity;
-import indi.twc.boot.redis.utils.ExpireTime;
+import indi.twc.boot.mongodb.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,14 +25,14 @@ public class RedisController {
 
     @RequestMapping("/addUserEntity")
     public void addUserEntity() throws Exception {
-        UserEntity userEntity = new UserEntity();
+        User user = new User();
 
-        userEntity.setUserName("hhh");
-        userEntity.setPassWord("ppp");
+        user.setUserName("hhh");
+        user.setPassWord("ppp");
 
         ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
 
-        valueOperations.set(userEntity.getUserName(), userEntity);
+        valueOperations.set(user.getUserName(), user);
     }
 
     @RequestMapping("/testSet")

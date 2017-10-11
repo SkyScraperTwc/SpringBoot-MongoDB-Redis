@@ -3,15 +3,16 @@ package indi.twc.boot.mongodb.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntity implements Serializable{
-    private static final long serialVersionUID = -3258839839160856613L;
+public class User{
 
     @Id
     private String id;
@@ -19,4 +20,6 @@ public class UserEntity implements Serializable{
     private String userName;
 
     private String passWord;
+    @DBRef
+    private Report report;
 }

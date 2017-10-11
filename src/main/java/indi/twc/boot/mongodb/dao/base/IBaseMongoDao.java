@@ -1,4 +1,4 @@
-package indi.twc.boot.mongodb.dao;
+package indi.twc.boot.mongodb.dao.base;
 
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
